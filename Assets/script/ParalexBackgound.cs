@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class ParalexBackgound : MonoBehaviour
 {
+    [SerializeField] [Range(0f, 1f)] float _lagAmount = 0f;
 
-    private float lenght;
-    private float startPos;
-    private GameObject cam;
-    [SerializeField] private float parallaxEffect;
+    Vector3 _previousCameraPosition;
+    Transform _camera;
+    Vector3 _targetPosition;
 
-    // Start is called before the first frame update
-    void Start()
+    private float ParallaxAmount => 1f - _lagAmount;
+
+    private void Awake()
     {
-        cam = GameObject.Find("CM vcam1");
-        startPos = transform.position.x;
-        lenght = GetComponent<SpriteRenderer>().bounds.size.x;
+        _camera = Camera.main.transform;
+        _previousCameraPosition = _camera.position;
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 movment = CameraMovement;
+        if (movment == Vector3.zero) return;
+        _targetPosition = new Vector3(transform.position.x + movment.x * ParallaxAmount, transform.position.y, transform.position.z);
+        transform.position = _targetPosition;
 
     }
 
-    // Update is called once per frame
-    void Update()
+    Vector3 CameraMovement
     {
-        float temp = (cam.transform.position.x * (1 - parallaxEffect));
-        float distance = (cam.transform.position.x * parallaxEffect);
-
-        transform.position = new Vector3(startPos + distance, transform.position.y, transform.position.z);
-
-        if (temp > startPos + lenght)
+        get
         {
-            startPos += lenght;
-        }
-        else if (temp < startPos + lenght)
-        {
-            startPos -= lenght;
+            Vector3 movement = _camera.position - _previousCameraPosition;
+            _previousCameraPosition = _camera.position;
+            return movement;
         }
     }
 }
