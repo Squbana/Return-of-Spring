@@ -10,6 +10,9 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpForce = 60f;
 
+    public int maxHealth = 100;
+    public int currentHealth;
+
     float moveHorizontal;
     public bool isGrounded = true;
     private bool facingRight = true;
@@ -22,6 +25,8 @@ public class PlayerControler : MonoBehaviour
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         animate = gameObject.GetComponent<Animator>();
 
+        currentHealth = maxHealth;
+
     }
 
     void Update()
@@ -29,6 +34,8 @@ public class PlayerControler : MonoBehaviour
         GettingInput();
         RunAnimation();
         Flipping();
+        
+
     }
 
     void FixedUpdate()
@@ -88,7 +95,7 @@ public class PlayerControler : MonoBehaviour
 
     }
 
-    
+   
 
 }
 
