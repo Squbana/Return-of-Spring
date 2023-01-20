@@ -9,6 +9,7 @@ public class PlayerControler : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpForce = 60f;
+    
 
     public int maxHealth = 100;
     public int currentHealth;

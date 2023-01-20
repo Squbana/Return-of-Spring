@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         textSocre.text = score.ToString() + " Flowers";
-
+        
     }
 
     
