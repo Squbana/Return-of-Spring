@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public int maxHealth = 9;
 
+    private Vector2 respownPoint;
 
     public HealthBar healthBar;
 
@@ -32,7 +33,6 @@ public class PlayerHealth : MonoBehaviour
 
         }
 
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,8 +41,11 @@ public class PlayerHealth : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
+    
 
+    
     private void OnDestroy()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
